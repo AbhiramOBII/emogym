@@ -3,38 +3,121 @@
 @section('title', 'Programs - Emogym')
 
 @section('content')
-<div class="min-h-screen bg-dark-bg">
+<div class="min-h-screen bg-white">
     <section class="py-20 px-4">
         <div class="max-w-7xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-bold text-dark-text mb-12 text-center">
-                Our {{ __('navigation.programs') }}
-            </h1>
-            <p class="text-xl text-dark-text-secondary mb-12 text-center max-w-3xl mx-auto">
-                Comprehensive programs designed to support your emotional wellness journey at every stage.
-            </p>
-            <div class="space-y-8">
-                <div class="bg-dark-surface p-8 rounded-lg">
-                    <h3 class="text-2xl font-semibold text-dark-text mb-4">Emotional Fitness Program</h3>
-                    <p class="text-dark-text-secondary mb-4">A 12-week comprehensive program focusing on building emotional resilience and mental strength.</p>
-                    <ul class="text-dark-text-secondary space-y-2">
-                        <li>• Weekly group sessions</li>
-                        <li>• Individual coaching</li>
-                        <li>• Practical exercises and tools</li>
-                        <li>• Progress tracking and assessment</li>
-                    </ul>
-                </div>
-                <div class="bg-dark-surface p-8 rounded-lg">
-                    <h3 class="text-2xl font-semibold text-dark-text mb-4">Stress Management Workshop</h3>
-                    <p class="text-dark-text-secondary mb-4">Learn effective techniques to manage stress and anxiety in daily life.</p>
-                    <ul class="text-dark-text-secondary space-y-2">
-                        <li>• Breathing techniques</li>
-                        <li>• Time management strategies</li>
-                        <li>• Relaxation methods</li>
-                        <li>• Workplace stress solutions</li>
-                    </ul>
-                </div>
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal mb-4">
+                    {{ __('programs.title') }} <span class="text-primary">{{ __('programs.programs') }}</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    {{ __('programs.description') }}
+                </p>
             </div>
+
+            @if ($programs->isNotEmpty())
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach ($programs as $program)
+                        @php
+                            $upcomingDate = $program->availableDates->first();
+                            $remainingSlots = $upcomingDate ? $upcomingDate->remainingSlots() : null;
+                        @endphp
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105">
+                            @if($program->image)
+                                <div class="aspect-video overflow-hidden">
+                                    <img src="{{ asset('storage/' . $program->image) }}" 
+                                         alt="{{ $program->title }}" 
+                                         class="w-full h-full object-cover">
+                                </div>
+                            @endif
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-charcoal mb-3">
+                                    @if(app()->getLocale() == 'kn' && $program->title_kn)
+                                        {{ $program->title_kn }}
+                                    @else
+                                        {{ $program->title }}
+                                    @endif
+                                </h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                    @if(app()->getLocale() == 'kn' && $program->short_description_kn)
+                                        {{ $program->short_description_kn }}
+                                    @else
+                                        {{ $program->short_description }}
+                                    @endif
+                                </p>
+                                
+                                <!-- Pricing -->
+                                @if($program->original_price > 0 || $program->cost > 0)
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <span class="text-2xl font-bold text-primary">₹{{ number_format($program->cost, 0) }}</span>
+                                        @if($program->original_price && $program->original_price > $program->cost)
+                                            <span class="text-lg text-gray-500 line-through">₹{{ number_format($program->original_price, 0) }}</span>
+                                            @if($program->discount_percentage)
+                                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">{{ number_format($program->discount_percentage, 0) }}% {{ __('programs.off') }}</span>
+                                            @endif
+                                        @endif
+                                    </div>
+                                @endif
+                                
+                                @if($upcomingDate)
+                                    <!-- Seats Available -->
+                                    <div class="flex items-center justify-between mb-4">
+                                        @if($remainingSlots === null)
+                                            <div class="flex items-center gap-2">
+                                                <i class="fas fa-users text-primary"></i>
+                                                <span class="text-sm text-gray-600">{{ __('programs.unlimited_seats') }}</span>
+                                            </div>
+                                        @elseif($remainingSlots > 0)
+                                            <div class="flex items-center gap-2">
+                                                <i class="fas fa-users text-primary"></i>
+                                                <span class="text-sm text-gray-600">{{ $remainingSlots }} {{ $remainingSlots === 1 ? __('programs.seat_left') : __('programs.seats_left') }}</span>
+                                            </div>
+                                        @else
+                                            <div class="flex items-center gap-2">
+                                                <i class="fas fa-users text-red-500"></i>
+                                                <span class="text-sm text-red-600 font-semibold">{{ __('programs.fully_booked') }}</span>
+                                            </div>
+                                        @endif
+                                        <div class="flex items-center gap-2">
+                                            <i class="fas fa-calendar text-primary"></i>
+                                            <span class="text-sm text-gray-600">
+                                                {{ $upcomingDate->start_date->format('M d, Y') }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                @endif
+                                
+                                <!-- CTA Button -->
+                                @if($remainingSlots === 0)
+                                    <button disabled class="w-full bg-gray-400 cursor-not-allowed text-white py-3 rounded-full font-semibold">
+                                        <i class="fas fa-times-circle"></i> {{ __('programs.fully_booked') }}
+                                    </button>
+                                @else
+                                    <button onclick="openRegistrationModal(
+                                        {{ $program->id }}, 
+                                        '{{ addslashes($program->title) }}', 
+                                        '₹{{ number_format($program->cost, 0) }}', 
+                                        '{{ $upcomingDate ? $upcomingDate->start_date->format('M d, Y') : 'TBD' }}',
+                                        {{ $upcomingDate ? $upcomingDate->id : 'null' }},
+                                        {{ $program->original_price ? "'₹" . number_format($program->original_price, 0) . "'" : 'null' }},
+                                        {{ $program->discount_percentage ? $program->discount_percentage : 'null' }}
+                                    )" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg">
+                                        {{ __('programs.register_now') }}
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="text-center py-16">
+                    <i class="fas fa-calendar-alt text-6xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-600 text-lg">{{ __('programs.no_programs') }}</p>
+                </div>
+            @endif
         </div>
     </section>
 </div>
+
+@include('partials.registration-modal')
 @endsection

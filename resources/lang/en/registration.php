@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'modal_title' => 'Register for Program',
+    'program_date' => 'Program Date',
+    'total_amount' => 'Total Amount',
+    'full_name' => 'Full Name',
+    'full_name_placeholder' => 'Enter your full name',
+    'email' => 'Email',
+    'email_placeholder' => 'your.email@example.com',
+    'phone' => 'Phone Number',
+    'phone_placeholder' => '+91 1234567890',
+    'message_optional' => 'Message (Optional)',
+    'message_placeholder' => 'Any questions or special requirements?',
+    'proceed_to_payment' => 'Proceed to Payment',
+    'processing' => 'Processing...',
+    'cancel' => 'Cancel',
+    'registration_successful' => 'Registration Successful!',
+    'registration_success_message' => 'Thank you for registering. We will contact you soon with further details.',
+    'original_price' => 'Original Price',
+    'discount' => 'Discount',
+    'program_fee' => 'Program Fee',
+    'an_error_occurred' => 'An error occurred. Please try again.',
+    'payment_verification_failed' => 'Payment verification failed. Please contact support.',
+];

@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'modal_title' => 'ಕಾರ್ಯಕ್ರಮಕ್ಕೆ ನೋಂದಾಯಿಸಿ',
+    'program_date' => 'ಕಾರ್ಯಕ್ರಮ ದಿನಾಂಕ',
+    'total_amount' => 'ಒಟ್ಟು ಮೊತ್ತ',
+    'full_name' => 'ಪೂರ್ಣ ಹೆಸರು',
+    'full_name_placeholder' => 'ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ',
+    'email' => 'ಇಮೇಲ್',
+    'email_placeholder' => 'your.email@example.com',
+    'phone' => 'ದೂರವಾಣಿ ಸಂಖ್ಯೆ',
+    'phone_placeholder' => '+91 1234567890',
+    'message_optional' => 'ಸಂದೇಶ (ಐಚ್ಚಿಕ)',
+    'message_placeholder' => 'ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳು ಅಥವಾ ವಿಶೇಷ ಅಗತ್ಯಗಳಿದೆಯೇ?',
+    'proceed_to_payment' => 'ಪಾವತಿಗೆ ಮುಂದುವರಿಸಿ',
+    'processing' => 'ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...',
+    'cancel' => 'ರದ್ದುಮಾಡಿ',
+    'registration_successful' => 'ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ!',
+    'registration_success_message' => 'ನೋಂದಾಯಿಸಿದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು. ಮುಂದಿನ ವಿವರಗಳನ್ನು ನಾವು ಶೀಘ್ರದಲ್ಲೇ ಸಂಪರ್ಕಿಸುತ್ತೇವೆ.',
+    'original_price' => 'ಮೂಲ ಬೆಲೆ',
+    'discount' => 'ರಿಯಾಯಿತಿ',
+    'program_fee' => 'ಕಾರ್ಯಕ್ರಮ ಶುಲ್ಕ',
+    'an_error_occurred' => 'ದೋಷ ಸಂಭವಿಸಿದೆ. ದಯವಿಟ್ಟು ಮರುಪ್ರಯತ್ನಿಸಿ.',
+    'payment_verification_failed' => 'ಪಾವತಿ ಪರಿಶೀಲನೆ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಬೆಂಬಲವನ್ನು ಸಂಪರ್ಕಿಸಿ.',
+];

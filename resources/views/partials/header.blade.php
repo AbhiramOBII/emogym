@@ -1,5 +1,5 @@
 <!-- Top Bar -->
-<div class="text-white py-2 px-4 text-sm relative overflow-hidden z-40" style="background-color: #1a1a1a;">
+<div class="text-white py-1 px-4 text-sm relative overflow-hidden z-40" style="background-color: #1a1a1a;">
     <div class="max-w-7xl mx-auto px-2 relative">
         <div class="grid grid-cols-2 md:flex md:justify-between md:items-center gap-4 items-center">
             <!-- Contact Info -->
@@ -42,21 +42,24 @@
 </div>
 
 <!-- Header -->
-<header class="shadow-lg sticky top-0 py-2 md:py-2 relative z-50" style="background: #262626; background: linear-gradient(155deg, rgba(38, 38, 38, 1) 38%, rgba(42, 42, 42, 1) 100%);">
+<header class="shadow-lg sticky top-0 py-1 md:py-1 relative z-50" style="background: #262626; background: linear-gradient(155deg, rgba(38, 38, 38, 1) 38%, rgba(42, 42, 42, 1) 100%);">
     <div class="max-w-7xl mx-auto px-3 md:px-5">
         <div class="flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center gap-2">
-                <img src="{{ asset('images/EmoGym-logo.png') }}" alt="Emogym" class="h-20 sm:h-24 md:h-32 w-auto">
+                <img src="{{ asset('images/EmoGym-logo.png') }}" alt="Emogym" class="h-14 sm:h-16 md:h-20 w-auto">
             </div>
 
             <!-- Desktop Navigation Menu -->
             <nav class="hidden md:flex items-center">
-                <ul class="flex list-none gap-9 m-0">
+                <ul class="flex items-center list-none gap-8 m-0 p-0">
                     <li><a href="{{ route('home') }}" class="text-dark-text no-underline font-semibold hover:text-primary transition-colors duration-300 relative group" style="font-size: 17px;">{{ __('navigation.home') }}<span class="absolute w-0 h-0.5 bottom-[-5px] left-0 bg-primary transition-all duration-300 group-hover:w-full"></span></a></li>
                     <li><a href="{{ route('about') }}" class="text-dark-text no-underline font-semibold hover:text-primary transition-colors duration-300 relative group" style="font-size: 17px;">{{ __('navigation.about') }}<span class="absolute w-0 h-0.5 bottom-[-5px] left-0 bg-primary transition-all duration-300 group-hover:w-full"></span></a></li>
                     <li><a href="{{ route('services') }}" class="text-dark-text no-underline font-semibold hover:text-primary transition-colors duration-300 relative group" style="font-size: 17px;">{{ __('navigation.services') }}<span class="absolute w-0 h-0.5 bottom-[-5px] left-0 bg-primary transition-all duration-300 group-hover:w-full"></span></a></li>
-                    <li><a href="{{ route('programs') }}" class="text-dark-text no-underline font-semibold hover:text-primary transition-colors duration-300 relative group" style="font-size: 17px;">{{ __('navigation.programs') }}<span class="absolute w-0 h-0.5 bottom-[-5px] left-0 bg-primary transition-all duration-300 group-hover:w-full"></span></a></li>
+                    <li><a href="{{ route('programs.index') }}" class="text-dark-text no-underline font-semibold hover:text-primary transition-colors duration-300 relative group" style="font-size: 17px;">{{ __('navigation.programs') }}<span class="absolute w-0 h-0.5 bottom-[-5px] left-0 bg-primary transition-all duration-300 group-hover:w-full"></span></a></li>
+                    
+                    <li><a href="{{ route('gallery') }}" class="text-dark-text no-underline font-semibold hover:text-primary transition-colors duration-300 relative group" style="font-size: 17px;">{{ __('navigation.gallery') }}<span class="absolute w-0 h-0.5 bottom-[-5px] left-0 bg-primary transition-all duration-300 group-hover:w-full"></span></a></li>
+                    
                     <li><a href="{{ route('blog') }}" class="text-dark-text no-underline font-semibold hover:text-primary transition-colors duration-300 relative group" style="font-size: 17px;">{{ __('navigation.blog') }}<span class="absolute w-0 h-0.5 bottom-[-5px] left-0 bg-primary transition-all duration-300 group-hover:w-full"></span></a></li>
                     <li><a href="{{ route('contact') }}" class="text-dark-text no-underline font-semibold hover:text-primary transition-colors duration-300 relative group" style="font-size: 17px;">{{ __('navigation.contact') }}<span class="absolute w-0 h-0.5 bottom-[-5px] left-0 bg-primary transition-all duration-300 group-hover:w-full"></span></a></li>
                 </ul>
@@ -75,7 +78,10 @@
                             <li><a href="{{ route('home') }}" class="text-dark-text no-underline font-medium text-lg hover:text-primary transition-colors duration-300 block py-2">{{ __('navigation.home') }}</a></li>
                             <li><a href="{{ route('about') }}" class="text-dark-text no-underline font-medium text-lg hover:text-primary transition-colors duration-300 block py-2">{{ __('navigation.about') }}</a></li>
                             <li><a href="{{ route('services') }}" class="text-dark-text no-underline font-medium text-lg hover:text-primary transition-colors duration-300 block py-2">{{ __('navigation.services') }}</a></li>
-                            <li><a href="{{ route('programs') }}" class="text-dark-text no-underline font-medium text-lg hover:text-primary transition-colors duration-300 block py-2">{{ __('navigation.programs') }}</a></li>
+                            <li><a href="{{ route('programs.index') }}" class="text-dark-text no-underline font-medium text-lg hover:text-primary transition-colors duration-300 block py-2">{{ __('navigation.programs') }}</a></li>
+                            
+                            <li><a href="{{ route('gallery') }}" class="text-dark-text no-underline font-medium text-lg hover:text-primary transition-colors duration-300 block py-2">{{ __('navigation.gallery') }}</a></li>
+                            
                             <li><a href="{{ route('blog') }}" class="text-dark-text no-underline font-medium text-lg hover:text-primary transition-colors duration-300 block py-2">{{ __('navigation.blog') }}</a></li>
                             <li><a href="{{ route('contact') }}" class="text-dark-text no-underline font-medium text-lg hover:text-primary transition-colors duration-300 block py-2">{{ __('navigation.contact') }}</a></li>
                         </ul>
@@ -87,7 +93,7 @@
             <div class="flex items-center gap-2 sm:gap-4">
                 <!-- Second Logo -->
                 <div class="flex items-center">
-                    <img src="{{ asset('images/Bhavanathmaka-2-white.webp') }}" alt="Bhavanathmaka" class="h-20 sm:h-24 md:h-32 w-auto">
+                    <img src="{{ asset('images/Bhavanathmaka-2-white.webp') }}" alt="Bhavanathmaka" class="h-14 sm:h-16 md:h-20 w-auto">
                 </div>
                 
                 <!-- Mobile Menu Toggle -->

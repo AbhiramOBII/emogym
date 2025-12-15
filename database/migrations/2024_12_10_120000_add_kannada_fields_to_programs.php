@@ -13,7 +13,6 @@ return new class extends Migration
             $table->text('description_kn')->nullable()->after('description');
             $table->text('short_description_kn')->nullable()->after('short_description');
             $table->string('who_is_this_for_kn')->nullable()->after('who_is_this_for');
-            $table->text('what_will_you_learn_kn')->nullable()->after('what_will_you_learn');
         });
     }
 
@@ -24,8 +23,7 @@ return new class extends Migration
                 'title_kn',
                 'description_kn',
                 'short_description_kn',
-                'who_is_this_for_kn',
-                'what_will_you_learn_kn'
+                'who_is_this_for_kn'
             ]);
         });
     }

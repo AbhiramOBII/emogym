@@ -4,7 +4,7 @@
 @section('meta_description', $blog->meta_description ?? $blog->excerpt)
 
 @section('content')
-<div class="min-h-screen bg-dark-bg">
+<div class="min-h-screen bg-dark-bg" style="background-color: #1a1a1a; background-image: radial-gradient(circle at 1px 1px, rgba(255, 79, 115, 0.15) 1px, transparent 0); background-size: 20px 20px;">
     <!-- Hero Section -->
     <section class="relative py-20 px-4">
         @if($blog->image)

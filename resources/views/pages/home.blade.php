@@ -107,7 +107,7 @@
 
 
   <!-- YouTube Videos Carousel Section -->
-        <section class="bg-dark-card py-16 md:py-24">
+        <section class="bg-dark-card py-16 md:py-24" style="background-color: #1a1a1a; background-image: radial-gradient(circle at 1px 1px, rgba(255, 79, 115, 0.15) 1px, transparent 0); background-size: 20px 20px;">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 
                 <!-- Section Header -->

@@ -52,8 +52,13 @@
                 <a href="{{ route('services') }}" class="text-gray-300 hover:text-primary transition-colors duration-300 text-base font-medium block py-2">{{ __('navigation.services') }}</a>
             </div>
             <div class="text-center">
-                <a href="{{ route('programs') }}" class="text-gray-300 hover:text-primary transition-colors duration-300 text-base font-medium block py-2">{{ __('navigation.programs') }}</a>
+                <a href="{{ route('programs.index') }}" class="text-gray-300 hover:text-primary transition-colors duration-300 text-base font-medium block py-2">{{ __('navigation.programs') }}</a>
             </div>
+            
+            <div class="text-center">
+                <a href="{{ route('gallery') }}" class="text-gray-300 hover:text-primary transition-colors duration-300 text-base font-medium block py-2">{{ __('navigation.gallery') }}</a>
+            </div>
+            
             <div class="text-center">
                 <a href="{{ route('blog') }}" class="text-gray-300 hover:text-primary transition-colors duration-300 text-base font-medium block py-2">{{ __('navigation.blog') }}</a>
             </div>

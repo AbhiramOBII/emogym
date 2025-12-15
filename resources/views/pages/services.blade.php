@@ -3,35 +3,49 @@
 @section('title', 'Services - Emogym')
 
 @section('content')
-<div class="min-h-screen bg-dark-bg">
+<div class="min-h-screen bg-dark-bg" style="background-color: #1a1a1a; background-image: radial-gradient(circle at 1px 1px, rgba(255, 79, 115, 0.15) 1px, transparent 0); background-size: 20px 20px;">
     <section class="py-20 px-4">
         <div class="max-w-7xl mx-auto">
             <h1 class="text-4xl md:text-5xl font-bold text-dark-text mb-12 text-center">
-                Our {{ __('navigation.services') }}
+                {{ __('services.title') }} {{ __('navigation.services') }}
             </h1>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-dark-surface p-6 rounded-lg">
-                    <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-comments text-primary text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-dark-text mb-3">Individual Counseling</h3>
-                    <p class="text-dark-text-secondary">One-on-one sessions with certified therapists for personalized mental health support.</p>
+            
+            @if($services->isEmpty())
+                <div class="text-center py-16">
+                    <i class="fas fa-concierge-bell text-6xl text-white/20 mb-4"></i>
+                    <p class="text-dark-text-secondary text-lg">{{ __('services.no_services') }}</p>
                 </div>
-                <div class="bg-dark-surface p-6 rounded-lg">
-                    <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-users text-accent text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-dark-text mb-3">Group Therapy</h3>
-                    <p class="text-dark-text-secondary">Supportive group sessions to share experiences and learn from others.</p>
+            @else
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach($services as $service)
+                        <div class="bg-dark-surface rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            @if($service->thumbnail)
+                                <div class="w-full h-48 overflow-hidden">
+                                    <img src="{{ asset('storage/' . $service->thumbnail) }}" 
+                                         alt="{{ $service->title }}" 
+                                         class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                                </div>
+                            @endif
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold text-dark-text mb-3">
+                                    @if(app()->getLocale() == 'kn' && $service->title_kn)
+                                        {{ $service->title_kn }}
+                                    @else
+                                        {{ $service->title }}
+                                    @endif
+                                </h3>
+                                <p class="text-dark-text-secondary">
+                                    @if(app()->getLocale() == 'kn' && $service->description_kn)
+                                        {{ $service->description_kn }}
+                                    @else
+                                        {{ $service->description }}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="bg-dark-surface p-6 rounded-lg">
-                    <div class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-leaf text-gold text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-dark-text mb-3">Mindfulness Training</h3>
-                    <p class="text-dark-text-secondary">Learn meditation and mindfulness techniques for stress reduction and emotional balance.</p>
-                </div>
-            </div>
+            @endif
         </div>
     </section>
 </div>

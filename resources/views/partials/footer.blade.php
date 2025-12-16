@@ -6,12 +6,12 @@
             <!-- Column 1: About Emogym (6 columns) -->
             <div class="md:col-span-6 space-y-6">
                 <h3 class="text-primary text-xl font-bold mb-8">{{ __('footer.about_emogym') }}</h3>
-                <div class="flex items-center gap-8 mb-6">
-                    <div class="bg-white/90 p-4 rounded-xl backdrop-blur-sm">
-                        <img src="{{ asset('images/EmoGym-logo.png') }}" alt="Emogym" class="h-16 w-auto">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="p-2 rounded-xl backdrop-blur-sm">
+                        <img src="{{ asset('images/EmoGym-logo.png') }}" alt="Emogym" class="h-24 w-auto">
                     </div>
-                    <div class="bg-white/90 p-4 rounded-xl backdrop-blur-sm">
-                        <img src="{{ asset('images/Bhavanathmaka-kannada.webp') }}" alt="Bhavanathmaka" class="h-16 w-auto">
+                    <div class="p-2 rounded-xl backdrop-blur-sm">
+                        <img src="{{ asset('images/Bhavanathmaka-2-white.webp') }}" alt="Bhavanathmaka" class="h-24 w-auto">
                     </div>
                 </div>
                 <p class="text-gray-300 mb-8 leading-relaxed text-base">
@@ -48,9 +48,9 @@
             <div class="text-center">
                 <a href="{{ route('about') }}" class="text-gray-300 hover:text-primary transition-colors duration-300 text-base font-medium block py-2">{{ __('navigation.about') }}</a>
             </div>
-            <div class="text-center">
+            <!-- <div class="text-center">
                 <a href="{{ route('services') }}" class="text-gray-300 hover:text-primary transition-colors duration-300 text-base font-medium block py-2">{{ __('navigation.services') }}</a>
-            </div>
+            </div> -->
             <div class="text-center">
                 <a href="{{ route('programs.index') }}" class="text-gray-300 hover:text-primary transition-colors duration-300 text-base font-medium block py-2">{{ __('navigation.programs') }}</a>
             </div>

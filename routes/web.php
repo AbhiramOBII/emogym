@@ -9,10 +9,13 @@ use App\Http\Controllers\Admin\ProgramDateController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ProgramRegistrationController as AdminProgramRegistrationController;
 use App\Http\Controllers\BlogPageController;
 use App\Http\Controllers\GalleryPageController;
 use App\Http\Controllers\ProgramRegistrationController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 
 // Language switching route
 Route::get('/lang/{locale}', function ($locale) {
@@ -33,6 +36,7 @@ Route::get('/about', function () {
 Route::get('/services', \App\Http\Controllers\ServicePageController::class)->name('services');
 
 Route::get('/programs', \App\Http\Controllers\ProgramPageController::class)->name('programs.index');
+Route::get('/programs/upcoming', [\App\Http\Controllers\ProgramPageController::class, 'upcoming'])->name('programs.upcoming');
 Route::get('/programs/{program:slug}', [\App\Http\Controllers\ProgramPageController::class, 'show'])->name('programs.show');
 
 // Program Registration with Payment
@@ -69,6 +73,9 @@ Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
 
+// Testimonial submission
+Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
+
 // Admin Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -100,11 +107,24 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     
     // Videos (videos only)
     Route::get('/videos', [GalleryController::class, 'videos'])->name('videos.index');
+    Route::post('/videos/{gallery}/set-hero', [GalleryController::class, 'setHero'])->name('videos.setHero');
+    Route::post('/videos/{gallery}/remove-hero', [GalleryController::class, 'removeHero'])->name('videos.removeHero');
     
     // Program Registrations
     Route::get('/registrations', [AdminProgramRegistrationController::class, 'index'])->name('registrations.index');
     Route::patch('/registrations/{registration}/status', [AdminProgramRegistrationController::class, 'updateStatus'])->name('registrations.updateStatus');
     Route::delete('/registrations/{registration}', [AdminProgramRegistrationController::class, 'destroy'])->name('registrations.destroy');
+    
+    // Banners
+    Route::resource('banners', BannerController::class)->except(['show']);
+    
+    // Testimonials
+    Route::get('/testimonials', [AdminTestimonialController::class, 'index'])->name('testimonials.index');
+    Route::get('/testimonials/{testimonial}/edit', [AdminTestimonialController::class, 'edit'])->name('testimonials.edit');
+    Route::put('/testimonials/{testimonial}', [AdminTestimonialController::class, 'update'])->name('testimonials.update');
+    Route::delete('/testimonials/{testimonial}', [AdminTestimonialController::class, 'destroy'])->name('testimonials.destroy');
+    Route::patch('/testimonials/{testimonial}/approve', [AdminTestimonialController::class, 'approve'])->name('testimonials.approve');
+    Route::patch('/testimonials/{testimonial}/reject', [AdminTestimonialController::class, 'reject'])->name('testimonials.reject');
 });
 
 require __DIR__.'/auth.php';

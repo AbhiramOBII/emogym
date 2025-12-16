@@ -22,10 +22,12 @@ class Gallery extends Model
         'thumbnail',
         'order',
         'is_active',
+        'is_hero',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_hero' => 'boolean',
         'order' => 'integer',
     ];
 

@@ -171,4 +171,36 @@ class GalleryController extends Controller
         return redirect()->route($route)
             ->with('success', 'Gallery item deleted successfully!');
     }
+
+    /**
+     * Set a video as the hero background video
+     */
+    public function setHero(Gallery $gallery)
+    {
+        // Only allow videos to be set as hero
+        if ($gallery->type !== 'video') {
+            return redirect()->route('admin.videos.index')
+                ->with('error', 'Only videos can be set as hero background.');
+        }
+
+        // Remove hero status from all other videos
+        Gallery::where('type', 'video')->update(['is_hero' => false]);
+
+        // Set this video as hero
+        $gallery->update(['is_hero' => true]);
+
+        return redirect()->route('admin.videos.index')
+            ->with('success', 'Hero background video updated successfully!');
+    }
+
+    /**
+     * Remove hero status from a video
+     */
+    public function removeHero(Gallery $gallery)
+    {
+        $gallery->update(['is_hero' => false]);
+
+        return redirect()->route('admin.videos.index')
+            ->with('success', 'Hero background video removed.');
+    }
 }

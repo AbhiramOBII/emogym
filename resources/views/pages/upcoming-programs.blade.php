@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Programs - Emogym')
+@section('title', __('programs.upcoming_title') . ' - Emogym')
 
 @section('content')
 <div class="min-h-screen bg-white" style="background-color: #1a1a1a; background-image: radial-gradient(circle at 1px 1px, rgba(255, 79, 115, 0.15) 1px, transparent 0); background-size: 20px 20px;">
@@ -8,10 +8,10 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                    {{ __('programs.title') }} <span class="text-primary">{{ __('programs.programs') }}</span>
+                    {{ __('programs.upcoming_title') }} <span class="text-primary">{{ __('programs.programs') }}</span>
                 </h1>
                 <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
-                    {{ __('programs.description') }}
+                    {{ __('programs.upcoming_description') }}
                 </p>
             </div>
 
@@ -31,6 +31,9 @@
                                 </div>
                             @endif
                             <div class="p-6">
+                                <div class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                                    {{ __('programs.coming_soon') }}
+                                </div>
                                 <h3 class="text-xl font-bold text-charcoal mb-3">
                                     @if(app()->getLocale() == 'kn' && $program->title_kn)
                                         {{ $program->title_kn }}
@@ -88,23 +91,6 @@
                                 @endif
                                 
                                 <!-- CTA Button -->
-                                <!-- @if($remainingSlots === 0)
-                                    <button disabled class="w-full bg-gray-400 cursor-not-allowed text-white py-3 rounded-full font-semibold">
-                                        <i class="fas fa-times-circle"></i> {{ __('programs.fully_booked') }}
-                                    </button>
-                                @else
-                                    <button onclick="openRegistrationModal(
-                                        {{ $program->id }}, 
-                                        '{{ addslashes($program->title) }}', 
-                                        '₹{{ number_format($program->cost, 0) }}', 
-                                        '{{ $upcomingDate ? $upcomingDate->start_date->format('M d, Y') : 'TBD' }}',
-                                        {{ $upcomingDate ? $upcomingDate->id : 'null' }},
-                                        {{ $program->original_price ? "'₹" . number_format($program->original_price, 0) . "'" : 'null' }},
-                                        {{ $program->discount_percentage ? $program->discount_percentage : 'null' }}
-                                    )" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg">
-                                        {{ __('programs.register_now') }}
-                                    </button>
-                                @endif -->
                                 <a href="{{ route('programs.show', $program->slug) }}" class="w-full inline-block bg-primary hover:bg-primary/90 text-white py-3 rounded-full font-semibold text-center transition-all duration-300 hover:shadow-lg">
                                     {{ __('programs.view_details') }}
                                 </a>
@@ -115,7 +101,7 @@
             @else
                 <div class="text-center py-16">
                     <i class="fas fa-calendar-alt text-6xl text-gray-300 mb-4"></i>
-                    <p class="text-gray-600 text-lg">{{ __('programs.no_programs') }}</p>
+                    <p class="text-gray-600 text-lg">{{ __('programs.no_upcoming') }}</p>
                 </div>
             @endif
         </div>

@@ -54,7 +54,12 @@
                         </div>
                         
                         <!-- Status Badge -->
-                        <div class="absolute top-2 right-2">
+                        <div class="absolute top-2 right-2 flex gap-1">
+                            @if($item->is_hero)
+                                <span class="px-2 py-1 rounded text-xs font-semibold bg-primary text-white">
+                                    <i class="fas fa-star mr-1"></i>Hero
+                                </span>
+                            @endif
                             <span class="px-2 py-1 rounded text-xs font-semibold {{ $item->is_active ? 'bg-green-500' : 'bg-gray-500' }} text-white">
                                 {{ $item->is_active ? 'Active' : 'Inactive' }}
                             </span>
@@ -74,17 +79,36 @@
                         </div>
                         
                         <!-- Actions -->
-                        <div class="flex gap-2">
-                            <a href="{{ route('admin.gallery.edit', $item) }}" class="flex-1 bg-white/10 hover:bg-primary text-white px-3 py-2 rounded text-center transition-colors duration-300 text-sm">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <form action="{{ route('admin.gallery.destroy', $item) }}" method="POST" class="flex-1" onsubmit="return confirm('Are you sure you want to delete this video?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="w-full bg-red-500/20 hover:bg-red-500 text-red-400 hover:text-white px-3 py-2 rounded transition-colors duration-300 text-sm">
-                                    <i class="fas fa-trash"></i> Delete
-                                </button>
-                            </form>
+                        <div class="flex flex-col gap-2">
+                            <!-- Hero Video Toggle -->
+                            @if($item->is_hero)
+                                <form action="{{ route('admin.videos.removeHero', $item) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="w-full bg-primary/20 hover:bg-primary/40 text-primary px-3 py-2 rounded transition-colors duration-300 text-sm">
+                                        <i class="fas fa-star"></i> Remove as Hero
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('admin.videos.setHero', $item) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="w-full bg-yellow-500/20 hover:bg-yellow-500 text-yellow-400 hover:text-white px-3 py-2 rounded transition-colors duration-300 text-sm">
+                                        <i class="fas fa-star"></i> Set as Hero
+                                    </button>
+                                </form>
+                            @endif
+                            
+                            <div class="flex gap-2">
+                                <a href="{{ route('admin.gallery.edit', $item) }}" class="flex-1 bg-white/10 hover:bg-primary text-white px-3 py-2 rounded text-center transition-colors duration-300 text-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form action="{{ route('admin.gallery.destroy', $item) }}" method="POST" class="flex-1" onsubmit="return confirm('Are you sure you want to delete this video?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="w-full bg-red-500/20 hover:bg-red-500 text-red-400 hover:text-white px-3 py-2 rounded transition-colors duration-300 text-sm">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

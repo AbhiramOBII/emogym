@@ -24,6 +24,7 @@ class Program extends Model
         'meta_title',
         'meta_description',
         'type',
+        'program_type',
         'link',
         'address',
         'cost',
@@ -32,6 +33,16 @@ class Program extends Model
         'discount_amount',
         'is_active',
     ];
+
+    public function scopeCurrent($query)
+    {
+        return $query->where('program_type', 'current');
+    }
+
+    public function scopeUpcoming($query)
+    {
+        return $query->where('program_type', 'upcoming');
+    }
 
     protected $casts = [
         'cost' => 'decimal:2',

@@ -22,6 +22,7 @@
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Type</th>
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Cost</th>
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Status</th>
+                        <th class="text-left py-4 px-6 text-white/70 font-semibold">Schedule</th>
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Actions</th>
                     </tr>
                 </thead>
@@ -60,6 +61,10 @@
                                     <a href="{{ route('admin.programs.dates.index', $program) }}" class="text-blue-400 hover:text-blue-300 transition-colors duration-200" title="Manage Dates">
                                         <i class="fas fa-calendar-alt"></i>
                                     </a>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center gap-3">
                                     <a href="{{ route('admin.programs.edit', $program) }}" class="text-primary hover:text-primary/80 transition-colors duration-200" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>

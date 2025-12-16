@@ -5,6 +5,7 @@ return [
     'about' => 'ನಮ್ಮ ಬಗ್ಗೆ',
     'services' => 'ಸೇವೆಗಳು',
     'programs' => 'ಕಾರ್ಯಕ್ರಮಗಳು',
+    'upcoming' => 'ಮುಂಬರುವ',
     'gallery' => 'ಗ್ಯಾಲರಿ',
     'blog' => 'ಬ್ಲಾಗ್',
     'contact' => 'ಸಂಪರ್ಕಿಸಿ',

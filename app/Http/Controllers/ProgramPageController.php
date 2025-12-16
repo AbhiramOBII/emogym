@@ -15,10 +15,26 @@ class ProgramPageController extends Controller
                       ->withCount(['paidRegistrations']);
             }])
             ->where('is_active', true)
+            ->current()
             ->latest()
             ->get();
 
         return view('pages.programs', compact('programs'));
+    }
+
+    public function upcoming(): View
+    {
+        $programs = Program::query()
+            ->with(['availableDates' => function($query) {
+                $query->orderBy('start_date')
+                      ->withCount(['paidRegistrations']);
+            }])
+            ->where('is_active', true)
+            ->upcoming()
+            ->latest()
+            ->get();
+
+        return view('pages.upcoming-programs', compact('programs'));
     }
 
     public function show(Program $program): View

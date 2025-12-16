@@ -17,6 +17,9 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
+    <!-- CKEditor 5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+    
     <style>
         :root {
             --primary: #FF6B35;
@@ -45,6 +48,42 @@
             background-color: rgba(255, 107, 53, 0.15);
             border-left: 4px solid var(--primary);
             padding-left: 1.5rem;
+        }
+        
+        /* CKEditor Dark Theme */
+        .ck-editor__editable {
+            min-height: 200px;
+            background-color: #2d2d2d !important;
+            color: #e5e5e5 !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+        .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+        .ck.ck-toolbar {
+            background-color: #1f1f1f !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+        .ck.ck-button:not(.ck-disabled):hover, .ck.ck-button.ck-on {
+            background-color: rgba(255, 107, 53, 0.3) !important;
+        }
+        .ck.ck-toolbar .ck-button .ck-icon {
+            color: #e5e5e5 !important;
+        }
+        .ck.ck-toolbar .ck-button__label {
+            color: #e5e5e5 !important;
+        }
+        .ck-content p, .ck-content h1, .ck-content h2, .ck-content h3, .ck-content h4, .ck-content h5, .ck-content h6, .ck-content li {
+            color: #e5e5e5 !important;
+        }
+        
+        /* Select dropdown styling */
+        select option {
+            background-color: #2d2d2d;
+            color: #e5e5e5;
+        }
+        select {
+            color: #e5e5e5 !important;
         }
     </style>
 </head>
@@ -85,12 +124,12 @@
                             <span>Blogs</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('admin.services.index') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 text-white rounded-lg {{ request()->routeIs('admin.services.*') ? 'active' : '' }}">
                             <i class="fas fa-concierge-bell w-5"></i>
                             <span>Services</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="{{ route('admin.photos.index') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 text-white rounded-lg {{ request()->routeIs('admin.photos.*') ? 'active' : '' }}">
                             <i class="fas fa-images w-5"></i>
@@ -101,6 +140,18 @@
                         <a href="{{ route('admin.videos.index') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 text-white rounded-lg {{ request()->routeIs('admin.videos.*') ? 'active' : '' }}">
                             <i class="fas fa-video w-5"></i>
                             <span>Videos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.banners.index') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 text-white rounded-lg {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
+                            <i class="fas fa-image w-5"></i>
+                            <span>Banners</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.testimonials.index') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 text-white rounded-lg {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
+                            <i class="fas fa-comments w-5"></i>
+                            <span>Testimonials</span>
                         </a>
                     </li>
                     <!-- <li>

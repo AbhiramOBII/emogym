@@ -53,6 +53,19 @@
                     @enderror
                 </div>
 
+                <!-- Program Type (Current/Upcoming) -->
+                <div>
+                    <label for="program_type" class="block text-white/70 mb-1 text-sm">Program Type <span class="text-red-500">*</span></label>
+                    <select name="program_type" id="program_type" required
+                        class="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-200">
+                        <option value="current" {{ old('program_type', 'current') === 'current' ? 'selected' : '' }}>Current</option>
+                        <option value="upcoming" {{ old('program_type') === 'upcoming' ? 'selected' : '' }}>Upcoming</option>
+                    </select>
+                    @error('program_type')
+                        <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Original Price -->
                 <div>
                     <label for="original_price" class="block text-white/70 mb-1 text-sm">Original Price (₹) <span class="text-red-500">*</span></label>
@@ -132,9 +145,8 @@
                 <!-- Description (English) -->
                 <div class="md:col-span-3">
                     <label for="description" class="block text-white/70 mb-1 text-sm">Description (English) <span class="text-red-500">*</span></label>
-                    <textarea name="description" id="description" rows="4" required
-                        class="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-200"
-                        placeholder="Full program description">{{ old('description') }}</textarea>
+                    <textarea name="description" id="description" rows="6" data-required="true"
+                        class="ckeditor-field w-full">{{ old('description') }}</textarea>
                     @error('description')
                         <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -143,9 +155,8 @@
                 <!-- Description (Kannada) -->
                 <div class="md:col-span-3">
                     <label for="description_kn" class="block text-white/70 mb-1 text-sm">Description (ಕನ್ನಡ)</label>
-                    <textarea name="description_kn" id="description_kn" rows="4"
-                        class="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-200"
-                        placeholder="ಸಂಪೂರ್ಣ ವಿವರಣೆ">{{ old('description_kn') }}</textarea>
+                    <textarea name="description_kn" id="description_kn" rows="6"
+                        class="ckeditor-field w-full">{{ old('description_kn') }}</textarea>
                     @error('description_kn')
                         <p class="text-red-400 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -333,6 +344,35 @@
 
     // Initial calculation
     calculateFinalCost();
+
+    // CKEditor initialization
+    document.querySelectorAll('.ckeditor-field').forEach(textarea => {
+        ClassicEditor
+            .create(textarea, {
+                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'undo', 'redo']
+            })
+            .then(editor => {
+                // Remove required attribute from hidden textarea to prevent validation error
+                textarea.removeAttribute('required');
+                
+                // Add custom validation on form submit
+                const form = textarea.closest('form');
+                form.addEventListener('submit', function(e) {
+                    const data = editor.getData();
+                    if (textarea.hasAttribute('data-required') && !data.trim()) {
+                        e.preventDefault();
+                        alert('Please fill in the ' + textarea.previousElementSibling.textContent.replace('*', '').trim());
+                        editor.focus();
+                        return false;
+                    }
+                    // Update textarea value before submit
+                    textarea.value = data;
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
 </script>
 @endpush
 @endsection

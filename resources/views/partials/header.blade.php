@@ -12,7 +12,7 @@
                     </div>
                     <div class="flex flex-col text-left">
                         <span class="text-xs text-white/70 uppercase tracking-wide">{{ __('navigation.call_us') }}</span>
-                        <a href="tel:+919964331200" class="text-white hover:text-primary transition-colors duration-300 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">+91-9964 33 12 00</a>
+                        <a href="tel:+919964331200" class="text-white hover:text-primary transition-colors duration-300 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300 whitespace-nowrap">+91-9964 33 12 00</a>
                     </div>
                 </div>
             </div>

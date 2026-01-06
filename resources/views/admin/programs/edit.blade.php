@@ -222,6 +222,15 @@
                     </label>
                 </div>
 
+                <!-- Is 2-Day Experience -->
+                <div class="flex items-center md:col-span-2">
+                    <label class="flex items-center gap-2 cursor-pointer mt-5">
+                        <input type="checkbox" name="is_two_day_experience" value="1" {{ old('is_two_day_experience', $program->is_two_day_experience) ? 'checked' : '' }}
+                            class="w-4 h-4 rounded bg-white/10 border-white/20 text-primary focus:ring-primary focus:ring-offset-0">
+                        <span class="text-white/70 text-sm">2-Day Experience (Show in Hero & Final CTA)</span>
+                    </label>
+                </div>
+
                 <!-- Meta Description -->
                 <div class="md:col-span-3">
                     <label for="meta_description" class="block text-white/70 mb-1 text-sm">Meta Description (SEO)</label>

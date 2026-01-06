@@ -26,7 +26,7 @@ class ProgramController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'title_kn' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
             'description' => 'required|string',
             'description_kn' => 'nullable|string',
             'short_description' => 'required|string|max:500',
@@ -44,6 +44,7 @@ class ProgramController extends Controller
             'discount_amount' => 'nullable|numeric|min:0',
             'cost' => 'required|numeric|min:0',
             'is_active' => 'boolean',
+            'is_two_day_experience' => 'boolean',
         ]);
 
         if ($request->hasFile('image')) {
@@ -69,7 +70,7 @@ class ProgramController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'title_kn' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
             'description' => 'required|string',
             'description_kn' => 'nullable|string',
             'short_description' => 'required|string|max:500',
@@ -87,6 +88,7 @@ class ProgramController extends Controller
             'discount_amount' => 'nullable|numeric|min:0',
             'cost' => 'required|numeric|min:0',
             'is_active' => 'boolean',
+            'is_two_day_experience' => 'boolean',
         ]);
 
         if ($request->hasFile('image')) {
@@ -116,5 +118,57 @@ class ProgramController extends Controller
 
         return redirect()->route('admin.programs.index')
             ->with('success', 'Program deleted successfully.');
+    }
+
+    public function toggleTwoDayExperience(Request $request, Program $program)
+    {
+        $validated = $request->validate([
+            'is_two_day_experience' => 'required|boolean',
+        ]);
+
+        // If enabling, disable all other programs first
+        if ($validated['is_two_day_experience']) {
+            Program::where('id', '!=', $program->id)
+                ->update(['is_two_day_experience' => false]);
+        }
+
+        $program->update([
+            'is_two_day_experience' => $validated['is_two_day_experience']
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => '2-Day Experience updated successfully'
+        ]);
+    }
+
+    public function toggleShowOnHome(Request $request, Program $program)
+    {
+        $validated = $request->validate([
+            'show_on_home' => 'required|boolean',
+        ]);
+
+        // If enabling, check if we already have 5 programs
+        if ($validated['show_on_home']) {
+            $currentCount = Program::where('show_on_home', true)
+                ->where('id', '!=', $program->id)
+                ->count();
+
+            if ($currentCount >= 5) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Maximum 5 programs can be shown on home page. Please disable another program first.'
+                ], 422);
+            }
+        }
+
+        $program->update([
+            'show_on_home' => $validated['show_on_home']
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Home page visibility updated successfully'
+        ]);
     }
 }

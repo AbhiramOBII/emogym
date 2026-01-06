@@ -22,6 +22,8 @@
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Type</th>
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Cost</th>
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Status</th>
+                        <th class="text-left py-4 px-6 text-white/70 font-semibold">2-Day Exp</th>
+                        <th class="text-left py-4 px-6 text-white/70 font-semibold">Show on Home</th>
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Schedule</th>
                         <th class="text-left py-4 px-6 text-white/70 font-semibold">Actions</th>
                     </tr>
@@ -55,6 +57,24 @@
                                 <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $program->is_active ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400' }}">
                                     {{ $program->is_active ? 'Active' : 'Inactive' }}
                                 </span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" 
+                                           class="sr-only peer two-day-toggle" 
+                                           data-program-id="{{ $program->id }}"
+                                           {{ $program->is_two_day_experience ? 'checked' : '' }}>
+                                    <div class="w-11 h-6 bg-white/10 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                                </label>
+                            </td>
+                            <td class="py-4 px-6">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" 
+                                           class="sr-only peer show-on-home-toggle" 
+                                           data-program-id="{{ $program->id }}"
+                                           {{ $program->show_on_home ? 'checked' : '' }}>
+                                    <div class="w-11 h-6 bg-white/10 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                                </label>
                             </td>
                             <td class="py-4 px-6">
                                 <div class="flex items-center gap-3">
@@ -97,4 +117,113 @@
         </div>
     @endif
 </div>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const twoDayToggles = document.querySelectorAll('.two-day-toggle');
+    const homeToggles = document.querySelectorAll('.show-on-home-toggle');
+    
+    twoDayToggles.forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            const programId = this.dataset.programId;
+            const isChecked = this.checked;
+            
+            twoDayToggles.forEach(t => t.disabled = true);
+            
+            fetch(`/admin/programs/${programId}/toggle-two-day-experience`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    is_two_day_experience: isChecked
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    if (isChecked) {
+                        twoDayToggles.forEach(t => {
+                            if (t !== toggle) {
+                                t.checked = false;
+                            }
+                        });
+                    }
+                    showNotification('2-Day Experience updated successfully!', 'success');
+                } else {
+                    toggle.checked = !isChecked;
+                    showNotification(data.message || 'Failed to update', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                toggle.checked = !isChecked;
+                showNotification('An error occurred', 'error');
+            })
+            .finally(() => {
+                twoDayToggles.forEach(t => t.disabled = false);
+            });
+        });
+    });
+    
+    homeToggles.forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            const programId = this.dataset.programId;
+            const isChecked = this.checked;
+            
+            homeToggles.forEach(t => t.disabled = true);
+            
+            fetch(`/admin/programs/${programId}/toggle-show-on-home`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    show_on_home: isChecked
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const checkedCount = Array.from(homeToggles).filter(t => t.checked).length;
+                    if (isChecked && checkedCount > 5) {
+                        toggle.checked = false;
+                        showNotification(data.message || 'Maximum 5 programs can be shown on home page', 'error');
+                    } else {
+                        showNotification('Home page visibility updated successfully!', 'success');
+                    }
+                } else {
+                    toggle.checked = !isChecked;
+                    showNotification(data.message || 'Failed to update', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                toggle.checked = !isChecked;
+                showNotification('An error occurred', 'error');
+            })
+            .finally(() => {
+                homeToggles.forEach(t => t.disabled = false);
+            });
+        });
+    });
+    
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg text-white z-50 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+});
+</script>
+@endpush
 @endsection

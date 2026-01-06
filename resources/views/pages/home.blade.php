@@ -113,10 +113,15 @@
                             <div class="text-sm font-medium text-dark-text-secondary">{{__('home.challenge_completions')}}</div>
                         </div>
                     </div>
-                    <div class="flex justify-center animate-slide-up delay-1000">
-                        <button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl animate-pulse-glow">
-                            <a href="{{ route('programs.index') }}">{{ __('home.start_journey') }}</a>
-                        </button>
+                    <div class="flex flex-col gap-4 animate-slide-up delay-1000">
+                        <a href="{{ $twoDayExperience ? route('programs.show', $twoDayExperience->slug) : route('programs.index') }}" class="w-full bg-primary hover:bg-primary/90 text-white px-6 py-4 rounded-full font-semibold text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-pulse-glow">
+                            <span class="block text-lg">{{ __('home.hero_cta_primary') }}</span>
+                            <span class="block text-sm opacity-80">{{ __('home.hero_cta_primary_sub') }}</span>
+                        </a>
+                        <a href="{{ route('programs.index') }}" class="w-full border-2 border-white/30 hover:border-primary text-white px-6 py-4 rounded-full font-semibold text-center transition-all duration-300 hover:scale-105">
+                            <span class="block text-lg">{{ __('home.hero_cta_secondary') }}</span>
+                            <span class="block text-sm opacity-70">{{ __('home.hero_cta_secondary_sub') }}</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -219,15 +224,106 @@
                                 <div class="text-base font-medium text-dark-text-secondary">{{__('home.challenge_completions')}}</div>
                             </div>
                         </div>
-                        <div class="flex justify-start animate-slide-up delay-900">
-                            <button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl animate-pulse-glow">
-                                <a href="{{ route('programs.index') }}"> {{ __('home.start_journey') }}</a>
-                            </button>
+                        <div class="flex flex-col gap-4 animate-slide-up delay-900">
+                            <a href="{{ $twoDayExperience ? route('programs.show', $twoDayExperience->slug) : route('programs.index') }}" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-center transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-pulse-glow">
+                                <span class="block text-lg">{{ __('home.hero_cta_primary') }}</span>
+                                <span class="block text-sm opacity-80">{{ __('home.hero_cta_primary_sub') }}</span>
+                            </a>
+                            <a href="{{ route('programs.index') }}" class="border-2 border-white/30 hover:border-primary text-white hover:text-primary px-8 py-4 rounded-full font-semibold text-center transition-all duration-300 hover:scale-105">
+                                <span class="block text-lg">{{ __('home.hero_cta_secondary') }}</span>
+                                <span class="block text-sm opacity-70">{{ __('home.hero_cta_secondary_sub') }}</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+    <!-- SECTION 2: THE PROMISE -->
+    <section class="py-16 md:py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-6" data-aos="fade-right">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                        {{ __('home.promise_title') }} <span class="text-primary">{{ __('home.promise_highlight') }}</span>
+                    </h2>
+                    <p class="text-lg text-white/70">{{ __('home.promise_description') }}</p>
+                </div>
+                <!-- Right Content -->
+                <div class="space-y-6" data-aos="fade-left">
+                    <p class="text-base md:text-lg text-white/80">{{ __('home.promise_text') }}</p>
+                    <div class="bg-gradient-to-r from-primary/20 to-transparent p-6 rounded-2xl border-l-4 border-primary">
+                        <p class="text-xl md:text-2xl font-bold text-primary italic">"{{ __('home.promise_quote') }}"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: THE EMOGYM STORY -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">{{ __('home.story_badge') }}</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal leading-tight">
+                    <span>{{ __('home.story_title_1') }}</span>
+                    <span class="text-primary">{{ __('home.story_title_2') }}</span>
+                    <span>{{ __('home.story_title_3') }}</span>
+                </h2>
+                <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">{{ __('home.story_intro') }}</p>
+            </div>
+
+            <!-- Tara's Row: Image Left, Content Right -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16" data-aos="fade-up">
+                <div class="relative group h-full">
+                    <div class="w-full max-h-[500px] rounded-3xl flex items-center justify-center bg-white">
+                        <img src="images/tara-1.png" alt="Tara" class="max-h-full w-auto object-contain transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="absolute -bottom-4 -left-16 right-0 text-center bg-primary text-white px-6 py-3 rounded-full font-bold text-lg shadow-xl max-w-[270px] mx-auto">
+                        {{ __('home.tara') }}
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="text-2xl md:text-3xl font-bold text-charcoal">{{ __('home.tara_story_title') }}</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">{{ __('home.tara_story') }}</p>
+                    <p class="text-primary font-semibold text-lg">{{ __('home.tara_rebuild') }}</p>
+                </div>
+            </div>
+
+            <!-- Sandesh's Row: Content Left, Image Right -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16" data-aos="fade-up">
+                <div class="space-y-6 lg:order-1 order-2">
+                    <h3 class="text-2xl md:text-3xl font-bold text-charcoal">{{ __('home.sandesh_story_title') }}</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed">{{ __('home.sandesh_story') }}</p>
+                    <p class="text-accent font-semibold text-lg">{{ __('home.sandesh_rebuild') }}</p>
+                </div>
+                <div class="relative group lg:order-2 order-1 h-full">
+                    <div class="w-full max-h-[500px] rounded-3xl flex items-center justify-center bg-white">
+                        <img src="images/sandesh-1.png" alt="Sandesh" class="max-h-full w-auto object-contain transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="absolute -bottom-4 left-0 right-0 text-center bg-accent text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl max-w-[250px] mx-auto">
+                        {{ __('home.sandesh') }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Section -->
+            <div class="text-center space-y-6 max-w-3xl mx-auto" data-aos="fade-up">
+                <p class="text-2xl font-bold text-charcoal">{{ __('home.story_awakening') }}</p>
+                <p class="text-lg text-gray-600">{{ __('home.story_emergence') }}</p>
+                <p class="text-gray-600">{{ __('home.story_mission_intro') }}</p>
+                <blockquote class="text-xl md:text-2xl font-bold text-primary italic bg-primary/5 p-8 rounded-3xl">
+                    {{ __('home.story_mission') }}
+                </blockquote>
+                <div class="pt-4">
+                    <p class="text-lg font-semibold text-charcoal">{{ __('home.story_different') }}</p>
+                    <p class="text-gray-600">{{ __('home.story_not_motivation') }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
         <!-- Banner Section -->
         @if($banners->isNotEmpty())
@@ -355,17 +451,73 @@
         </section>
         @endif
 
-  <!-- YouTube Videos Carousel Section -->
-        <section class="bg-dark-card py-6 md:py-12" style="background-color: #1a1a1a; background-image: radial-gradient(circle at 1px 1px, rgba(255, 79, 115, 0.15) 1px, transparent 0); background-size: 20px 20px;">
-            <!-- Section Header -->
-            <div class="text-center mb-12 px-6 lg:px-8" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark-text mb-4">
+    <!-- SECTION 4: TRANSFORMATION PATH with Videos -->
+    <section class="py-16 md:py-24" style="background-color: #1a1a1a; background-image: radial-gradient(circle at 1px 1px, rgba(255, 79, 115, 0.15) 1px, transparent 0); background-size: 20px 20px;">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-12" data-aos="fade-up">
+                <span class="inline-block bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">{{ __('home.path_badge') }}</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+                    {{ __('home.path_title') }} <span class="text-primary">{{ __('home.path_highlight') }}</span>
+                </h2>
+                <p class="text-lg text-white/70 mt-4">{{ __('home.path_subtitle') }}</p>
+            </div>
+
+            <!-- 3 Steps -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Step 1 -->
+                <div class="relative bg-gradient-to-b from-white/10 to-white/5 rounded-3xl p-8 border border-white/10" data-aos="fade-up">
+                    <div class="absolute -top-4 left-8 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg">1</div>
+                    <h3 class="text-xl font-bold text-white mb-6 mt-4">{{ __('home.path_step1_title') }}</h3>
+                    <ul class="space-y-3 text-white/80">
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step1_item1') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step1_item2') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step1_item3') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step1_item4') }}</li>
+                    </ul>
+                </div>
+                <!-- Step 2 -->
+                <div class="relative bg-gradient-to-b from-primary/20 to-primary/10 rounded-3xl p-8 border border-primary/30" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute -top-4 left-8 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg">2</div>
+                    <h3 class="text-xl font-bold text-white mb-6 mt-4">{{ __('home.path_step2_title') }}</h3>
+                    <ul class="space-y-3 text-white/80">
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step2_item1') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step2_item2') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step2_item3') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step2_item4') }}</li>
+                    </ul>
+                </div>
+                <!-- Step 3 -->
+                <div class="relative bg-gradient-to-b from-white/10 to-white/5 rounded-3xl p-8 border border-white/10" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute -top-4 left-8 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg">3</div>
+                    <h3 class="text-xl font-bold text-white mb-6 mt-4">{{ __('home.path_step3_title') }}</h3>
+                    <ul class="space-y-3 text-white/80">
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step3_item1') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step3_item2') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step3_item3') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step3_item4') }}</li>
+                        <li class="flex items-start gap-3"><svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.path_step3_item5') }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-lg text-primary font-semibold mb-6">{{ __('home.path_cta') }}</p>
+                <a href="{{ route('programs.index') }}" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105">
+                    {{ __('home.start_journey') }} <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+
+            <!-- Videos Section Header -->
+            <!-- <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
                     {{ __('home.watch_transformation') }} <span class="text-primary animate-text-shimmer">{{ __('home.transformation_stories') }}</span> {{ __('home.stories') }}
                 </h2>
-                <p class="text-lg md:text-xl text-dark-text-secondary max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
                     {{ __('home.discover_stories') }}
                 </p>
-            </div>
+            </div> -->
 
             <!-- Video Cards Container -->
             @if($videos->isEmpty())
@@ -505,119 +657,110 @@
             </div>
         </div>
 
-<!-- Upcoming Programs Section -->
-<section class="py-6  px-4 bg-white">
-    <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal mb-4"> 
-                <span class="text-primary animate-text-shimmer">{{ __('home.programs') }}</span>
-            </h2>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                {{ __('home.join_transformative') }}
-            </p>
+<!-- SECTION 5: PROGRAMS OVERVIEW - Full Width Banner Cards -->
+<section class="py-16 md:py-24 bg-gray-50">
+    <!-- Header -->
+    <div class="text-center mb-16 max-w-4xl mx-auto px-6 lg:px-8" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal">
+            {{ __('home.programs_overview_title') }} <span class="text-primary">{{ __('home.programs_overview_highlight') }}</span>
+        </h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">
+            {{ __('home.programs_overview_subtitle') }}
+        </p>
+    </div>
+    
+    @if($programs->isEmpty())
+        <div class="text-center py-16 max-w-5xl mx-auto px-6 lg:px-8">
+            <i class="fas fa-calendar-alt text-6xl text-gray-300 mb-4"></i>
+            <p class="text-gray-600 text-lg">{{ __('home.no_programs') }}</p>
         </div>
-        
-        @if($programs->isEmpty())
-            <div class="text-center py-16">
-                <i class="fas fa-calendar-alt text-6xl text-gray-300 mb-4"></i>
-                <p class="text-gray-600 text-lg">{{ __('home.no_programs') }}</p>
-            </div>
-        @else
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($programs as $index => $program)
+    @else
+        <!-- Programs rendered as full-width banners -->
+        <div>
+            @foreach($programs as $index => $program)
                     @php
                         $upcomingDate = $program->availableDates->first();
                         $remainingSlots = $upcomingDate ? $upcomingDate->remainingSlots() : null;
                     @endphp
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover-lift" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
+                    <div class="relative w-full min-h-[420px] aspect-[4/3] sm:aspect-[16/9] md:aspect-[3/1] overflow-hidden group" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                         @if($program->image)
-                            <div class="aspect-video overflow-hidden">
-                                <img src="{{ asset('storage/' . $program->image) }}" 
-                                     alt="{{ $program->title }}" 
-                                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                            </div>
+                            <img src="{{ asset('storage/' . $program->image) }}"
+                                 alt="{{ $program->title }}"
+                                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        @else
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary to-charcoal"></div>
                         @endif
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-charcoal mb-3">
-                                @if(app()->getLocale() == 'kn' && $program->title_kn)
-                                    {{ $program->title_kn }}
-                                @else
-                                    {{ $program->title }}
-                                @endif
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                @if(app()->getLocale() == 'kn' && $program->short_description_kn)
-                                    {{ $program->short_description_kn }}
-                                @else
-                                    {{ $program->short_description }}
-                                @endif
-                            </p>
-                            
-                            <!-- Pricing -->
-                            @if($program->original_price > 0 || $program->cost > 0)
-                                <div class="flex items-center gap-3 mb-4">
-                                    <span class="text-2xl font-bold text-primary">₹{{ number_format($program->cost, 0) }}</span>
-                                    @if($program->original_price && $program->original_price > $program->cost)
-                                        <span class="text-lg text-gray-500 line-through">₹{{ number_format($program->original_price, 0) }}</span>
-                                        @if($program->discount_percentage)
-                                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">{{ number_format($program->discount_percentage, 0) }}% {{ __('home.off') }}</span>
-                                        @endif
-                                    @endif
-                                </div>
-                            @endif
-                            
-                            @if($upcomingDate)
-                                <!-- Program Details -->
-                                <div class="flex items-center justify-between mb-4">
-                                    @if($remainingSlots === null)
-                                        <div class="flex items-center gap-2">
-                                            <i class="fas fa-users text-primary"></i>
-                                            <span class="text-sm text-gray-600">{{ __('home.unlimited_seats') }}</span>
-                                        </div>
-                                    @elseif($remainingSlots > 0)
-                                        <div class="flex items-center gap-2">
-                                            <i class="fas fa-users text-primary"></i>
-                                            <span class="text-sm text-gray-600">{{ $remainingSlots }} {{ $remainingSlots === 1 ? __('home.seat_left') : __('home.seats_left') }}</span>
-                                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30"></div>
+
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="max-w-3xl px-8 md:px-12 lg:px-16 space-y-4 text-white">
+                                <span class="inline-flex items-center gap-2 bg-white/10 text-white uppercase tracking-widest text-xs font-semibold px-4 py-2 rounded-full">
+                                    <i class="fas fa-fire text-primary"></i> {{ __('home.programs_overview_highlight') }}
+                                </span>
+
+                                <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+                                    @if(app()->getLocale() == 'kn' && $program->title_kn)
+                                        {{ $program->title_kn }}
                                     @else
-                                        <div class="flex items-center gap-2">
-                                            <i class="fas fa-users text-red-500"></i>
-                                            <span class="text-sm text-red-600 font-semibold">{{ __('home.fully_booked') }}</span>
-                                        </div>
+                                        {{ $program->title }}
                                     @endif
-                                    <div class="flex items-center gap-2">
-                                        <i class="fas fa-calendar text-primary"></i>
-                                        <span class="text-sm text-gray-600">
-                                            {{ $upcomingDate->start_date->format('M d, Y') }}
-                                            @if($upcomingDate->end_date && !$upcomingDate->start_date->isSameDay($upcomingDate->end_date))
-                                                - {{ $upcomingDate->end_date->format('M d, Y') }}
+                                </h3>
+
+                                <p class="text-white/80 text-base md:text-lg">
+                                    @if(app()->getLocale() == 'kn' && $program->short_description_kn)
+                                        {{ $program->short_description_kn }}
+                                    @else
+                                        {{ $program->short_description }}
+                                    @endif
+                                </p>
+
+                                @if($program->original_price > 0 || $program->cost > 0)
+                                    <div class="flex items-center gap-4 text-white">
+                                        <span class="text-3xl font-bold text-primary">₹{{ number_format($program->cost, 0) }}</span>
+                                        @if($program->original_price && $program->original_price > $program->cost)
+                                            <span class="text-xl text-white/50 line-through">₹{{ number_format($program->original_price, 0) }}</span>
+                                            @if($program->discount_percentage)
+                                                <span class="bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">{{ number_format($program->discount_percentage, 0) }}% {{ __('home.off') }}</span>
                                             @endif
-                                        </span>
+                                        @endif
                                     </div>
+                                @endif
+
+                                @if($upcomingDate)
+                                    <div class="flex flex-wrap gap-6 text-white/80 text-sm md:text-base">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fas fa-calendar text-primary"></i>
+                                            <span>
+                                                {{ $upcomingDate->start_date->format('M d, Y') }}
+                                                @if($upcomingDate->end_date && !$upcomingDate->start_date->isSameDay($upcomingDate->end_date))
+                                                    - {{ $upcomingDate->end_date->format('M d, Y') }}
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <i class="fas fa-users text-primary"></i>
+                                            @if($remainingSlots === null)
+                                                <span>{{ __('home.unlimited_seats') }}</span>
+                                            @elseif($remainingSlots > 0)
+                                                <span>{{ $remainingSlots }} {{ $remainingSlots === 1 ? __('home.seat_left') : __('home.seats_left') }}</span>
+                                            @else
+                                                <span class="text-red-400 font-semibold">{{ __('home.fully_booked') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
+
+                                <div class="flex flex-wrap gap-4 pt-2">
+                                    <a href="{{ route('programs.show', $program->slug) }}" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-full font-semibold text-base md:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                                        {{ __('home.view_details') }}
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                    </a>
+                                    <!-- <a href="{{ route('programs.index') }}" class="inline-flex items-center gap-2 border border-white/40 text-white px-6 py-3 rounded-full font-semibold text-base md:text-lg hover:bg-white/10 transition-all duration-300">
+                                        {{ __('home.view_all_programs') }}
+                                    </a> -->
                                 </div>
-                            @endif
-                            
-                            <!-- CTA Button -->
-                            <!-- @if($remainingSlots === 0)
-                                <button disabled class="w-full bg-gray-400 cursor-not-allowed text-white py-3 rounded-full font-semibold">
-                                    <i class="fas fa-times-circle"></i> {{ __('home.fully_booked') }}
-                                </button>
-                            @else
-                                <button onclick="openRegistrationModal(
-                                    {{ $program->id }}, 
-                                    '{{ addslashes($program->title) }}', 
-                                    '₹{{ number_format($program->cost, 0) }}', 
-                                    '{{ $upcomingDate ? $upcomingDate->start_date->format('M d, Y') : 'TBD' }}',
-                                    {{ $upcomingDate ? $upcomingDate->id : 'null' }},
-                                    {{ $program->original_price ? "'₹" . number_format($program->original_price, 0) . "'" : 'null' }},
-                                    {{ $program->discount_percentage ? $program->discount_percentage : 'null' }}
-                                )" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg">
-                                    {{ __('home.register_now') }}
-                                </button>
-                            @endif -->
-                            <a href="{{ route('programs.show', $program->slug) }}" class="w-full inline-block bg-primary hover:bg-primary/90 text-white py-3 rounded-full font-semibold text-center transition-all duration-300 hover:shadow-lg">
-                                {{ __('home.view_details') }}
-                            </a>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -741,15 +884,77 @@
 </section>
 @endif
 
-<!-- Testimonials Section -->
+<!-- SECTION 6: SIGNATURE FRAMEWORK - 3-Path System -->
+<section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12" data-aos="fade-up">
+            <span class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">{{ __('home.framework_badge') }}</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal">
+                {{ __('home.framework_title') }} <span class="text-primary">{{ __('home.framework_highlight') }}</span>
+            </h2>
+            <p class="text-lg text-gray-600 mt-4">{{ __('home.framework_subtitle') }}</p>
+        </div>
+
+        <!-- 3 Pillars -->
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Pillar 1: Emotional Strength -->
+            <div class="bg-gradient-to-b from-primary/10 to-primary/5 rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300" data-aos="fade-up">
+                <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-charcoal mb-6">{{ __('home.framework_pillar1_title') }}</h3>
+                <ul class="space-y-3 text-gray-600 text-left">
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar1_item1') }}</li>
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar1_item2') }}</li>
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar1_item3') }}</li>
+                </ul>
+            </div>
+
+            <!-- Pillar 2: Spiritual Alignment -->
+            <div class="bg-gradient-to-b from-accent/10 to-accent/5 rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-charcoal mb-6">{{ __('home.framework_pillar2_title') }}</h3>
+                <ul class="space-y-3 text-gray-600 text-left">
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar2_item1') }}</li>
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar2_item2') }}</li>
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar2_item3') }}</li>
+                </ul>
+            </div>
+
+            <!-- Pillar 3: Identity Upgrade -->
+            <div class="bg-gradient-to-b from-charcoal/10 to-charcoal/5 rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-20 h-20 bg-charcoal rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-charcoal mb-6">{{ __('home.framework_pillar3_title') }}</h3>
+                <ul class="space-y-3 text-gray-600 text-left">
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-charcoal flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar3_item1') }}</li>
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-charcoal flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar3_item2') }}</li>
+                    <li class="flex items-center gap-3"><svg class="w-5 h-5 text-charcoal flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>{{ __('home.framework_pillar3_item3') }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 7: TESTIMONIALS -->
 @if($testimonials->count() > 0)
-<section class="bg-gray-50 py-6 md:py-12">
+<section class="bg-gray-50 py-16 md:py-24">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         
         <!-- Section Header -->
         <div class="text-center mb-12" data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal mb-4">
-                {{ __('home.what_our') }} <span class="text-primary animate-text-shimmer">{{ __('home.community_says') }}</span> {{ __('home.says') }}
+                {{ __('home.testimonials_title') }} <span class="text-primary animate-text-shimmer">{{ __('home.testimonials_highlight') }}</span>
             </h2>
             <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                 {{ __('home.real_stories') }}
@@ -812,13 +1017,51 @@
 </section>
 @endif
 
-<!-- Share Your Story CTA Section -->
-<section class="py-6 bg-white" data-aos="fade-up">
+<!-- Share Your Story CTA -->
+<section class="py-12 bg-white" data-aos="fade-up">
     <div class="text-center">
         <button onclick="openTestimonialModal()" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl animate-pulse-glow">
             <i class="fas fa-heart text-xl"></i>
             {{ __('home.share_your_story') }}
         </button>
+    </div>
+</section>
+
+<!-- SECTION 8: FINAL CTA -->
+<section class="py-16 md:py-24 bg-gradient-to-b from-black to-gray-900">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8">
+            {{ __('home.final_cta_title') }} <span class="text-primary">{{ __('home.final_cta_highlight') }}</span>
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+            <!-- Primary CTA -->
+            <div class="bg-gradient-to-br from-primary to-primary/80 rounded-3xl p-8 text-white text-left hover:scale-105 transition-transform duration-300">
+                <h3 class="text-xl font-bold mb-3">{{ __('home.final_cta_primary') }}</h3>
+                <p class="text-white/80 mb-6">{{ __('home.final_cta_primary_sub') }}</p>
+                <a href="{{ $twoDayExperience ? route('programs.show', $twoDayExperience->slug) : route('programs.index') }}" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-full font-semibold hover:bg-white/90 transition-all">
+                    {{ __('home.start_journey') }} <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+            
+            <!-- Secondary CTA -->
+            <div class="bg-gradient-to-br from-charcoal to-charcoal/80 rounded-3xl p-8 text-white text-left hover:scale-105 transition-transform duration-300">
+                <h3 class="text-xl font-bold mb-3">{{ __('home.final_cta_secondary') }}</h3>
+                <p class="text-white/80 mb-6">{{ __('home.final_cta_secondary_sub') }}</p>
+                <a href="{{ route('programs.index') }}" class="inline-flex items-center gap-2 bg-white text-charcoal px-6 py-3 rounded-full font-semibold hover:bg-white/90 transition-all">
+                    {{ __('home.view_details') }} <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 9: FOOTER MESSAGE -->
+<section class="py-12 bg-black">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center" data-aos="fade-up">
+        <p class="text-xl md:text-2xl text-white/70 italic leading-relaxed">
+            {{ __('home.footer_message') }}
+        </p>
     </div>
 </section>
 

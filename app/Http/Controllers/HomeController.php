@@ -43,8 +43,10 @@ class HomeController extends Controller
             ->limit(6)
             ->get();
 
-        // Get active current programs with upcoming dates (limit to 3 for homepage)
+        // Get active current programs with upcoming dates (limit to 5 for homepage)
         $programs = Program::where('is_active', true)
+            ->where('is_two_day_experience', false)
+            ->where('show_on_home', true)
             ->current()
             ->with(['availableDates' => function($query) {
                 $query->where('start_date', '>=', now())
@@ -53,7 +55,7 @@ class HomeController extends Controller
                       ->withCount(['paidRegistrations']);
             }])
             ->orderBy('created_at', 'desc')
-            ->limit(3)
+            ->limit(5)
             ->get();
 
         // Get active upcoming programs (limit to 3 for homepage)
@@ -81,6 +83,11 @@ class HomeController extends Controller
             ->limit(6)
             ->get();
 
-        return view('pages.home', compact('heroVideo', 'videos', 'services', 'programs', 'upcomingPrograms', 'banners', 'testimonials'));
+        // Get 2-Day Experience program if enabled
+        $twoDayExperience = Program::where('is_active', true)
+            ->where('is_two_day_experience', true)
+            ->first();
+
+        return view('pages.home', compact('heroVideo', 'videos', 'services', 'programs', 'upcomingPrograms', 'banners', 'testimonials', 'twoDayExperience'));
     }
 }

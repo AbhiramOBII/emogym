@@ -82,6 +82,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     
     // Programs
     Route::resource('programs', ProgramController::class);
+    Route::post('programs/{program}/toggle-two-day-experience', [ProgramController::class, 'toggleTwoDayExperience'])->name('programs.toggleTwoDayExperience');
+    Route::post('programs/{program}/toggle-show-on-home', [ProgramController::class, 'toggleShowOnHome'])->name('programs.toggleShowOnHome');
     
     // Program Dates
     Route::prefix('programs/{program}')->name('programs.')->group(function () {

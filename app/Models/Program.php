@@ -32,6 +32,8 @@ class Program extends Model
         'discount_percentage',
         'discount_amount',
         'is_active',
+        'is_two_day_experience',
+        'show_on_home',
     ];
 
     public function scopeCurrent($query)
@@ -50,6 +52,8 @@ class Program extends Model
         'discount_percentage' => 'decimal:2',
         'discount_amount' => 'decimal:2',
         'is_active' => 'boolean',
+        'is_two_day_experience' => 'boolean',
+        'show_on_home' => 'boolean',
     ];
 
     protected static function boot()

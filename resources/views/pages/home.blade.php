@@ -4,7 +4,7 @@
 
 @section('content')
    <!--Hero Section-->
-        <section class="lg:py-20 lg:py-6 particles-bg">
+        <section class="lg:py-20 lg:py-6 particles-bg overflow-hidden">
             
             <!-- Mobile: Title Section with Video Background -->
             <div class="lg:hidden relative overflow-hidden py-12">
@@ -56,7 +56,7 @@
             </div>
 
             <!-- Mobile: Images Section (No Video Background) -->
-            <div class="lg:hidden bg-dark-bg py-8">
+            <div class="lg:hidden bg-dark-bg py-8 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="grid grid-cols-2 gap-4 items-start">
                         <!-- Image 1 -->
@@ -65,7 +65,9 @@
                                 <div class="aspect-[3/5] rounded-2xl overflow-hidden shadow-2xl">
                                     <img src="images/tara-3.webp" 
                                          alt="Mental Wellness" 
-                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                         fetchpriority="high"
+                                         width="591" height="983">
                                 </div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
@@ -80,7 +82,8 @@
                                 <div class="aspect-[3/5] rounded-2xl overflow-hidden shadow-2xl">
                                     <img src="images/Sandesh-4.webp" 
                                          alt="Therapy Session" 
-                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                         width="591" height="983">
                                 </div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-accent/30 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
@@ -93,7 +96,7 @@
             </div>
 
             <!-- Mobile: Stats Section -->
-            <div class="lg:hidden bg-dark-bg py-8">
+            <div class="lg:hidden bg-dark-bg py-8 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="grid grid-cols-2 gap-6 mb-8">
                         <div class="text-center animate-scale-in delay-600">
@@ -167,7 +170,9 @@
                                 <div class="aspect-[3/5] rounded-2xl overflow-hidden shadow-2xl">
                                     <img src="images/tara-3.webp" 
                                          alt="Mental Wellness" 
-                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                         fetchpriority="high"
+                                         width="591" height="983">
                                 </div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
@@ -194,7 +199,8 @@
                                 <div class="aspect-[3/5] rounded-2xl overflow-hidden shadow-2xl">
                                     <img src="images/Sandesh-4.webp" 
                                          alt="Therapy Session" 
-                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                         width="591" height="983">
                                 </div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-accent/30 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
@@ -240,7 +246,7 @@
         </section>
 
     <!-- SECTION 2: THE PROMISE -->
-    <section class="py-16 md:py-24 bg-gradient-to-b from-gray-900 to-black">
+    <section class="py-16 md:py-24 bg-gradient-to-b from-gray-900 to-black overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <!-- Left Content -->
@@ -262,7 +268,7 @@
     </section>
 
     <!-- SECTION 3: THE EMOGYM STORY -->
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-16 md:py-24 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <!-- Header -->
             <div class="text-center mb-16" data-aos="fade-up">
@@ -279,9 +285,9 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center mb-16" data-aos="fade-up">
                 <div class="relative group h-full">
                     <div class="w-full max-h-[500px] rounded-3xl flex items-center justify-center bg-white">
-                        <img src="images/tara-1.png" alt="Tara" class="max-h-full w-auto object-contain transition-transform duration-700 group-hover:scale-105">
+                        <img src="images/tara-1.png" alt="Tara" class="max-h-full w-auto object-contain transition-transform duration-700 group-hover:scale-105" loading="lazy" width="404" height="625">
                     </div>
-                    <div class="absolute -bottom-4 -left-16 right-0 text-center bg-primary text-white px-6 py-3 rounded-full font-bold text-lg shadow-xl max-w-[270px] mx-auto">
+                    <div class="absolute -bottom-4 left-0 right-0 text-center bg-primary text-white px-6 py-3 rounded-full font-bold text-lg shadow-xl max-w-[270px] mx-auto">
                         {{ __('home.tara') }}
                     </div>
                 </div>
@@ -301,7 +307,7 @@
                 </div>
                 <div class="relative group lg:order-2 order-1 h-full">
                     <div class="w-full max-h-[500px] rounded-3xl flex items-center justify-center bg-white">
-                        <img src="images/sandesh-1.png" alt="Sandesh" class="max-h-full w-auto object-contain transition-transform duration-700 group-hover:scale-105">
+                        <img src="images/sandesh-1.png" alt="Sandesh" class="max-h-full w-auto object-contain transition-transform duration-700 group-hover:scale-105" loading="lazy" width="383" height="625">
                     </div>
                     <div class="absolute -bottom-4 left-0 right-0 text-center bg-accent text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl max-w-[250px] mx-auto">
                         {{ __('home.sandesh') }}
@@ -339,7 +345,8 @@
                                             <!-- Banner Image -->
                                             <img src="{{ asset('storage/' . $banner->image) }}" 
                                                  alt="{{ $banner->title }}"
-                                                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                 loading="lazy">
                                             
                                             <!-- Gradient Overlay -->
                                             <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
@@ -409,7 +416,8 @@
                         <!-- Banner Image -->
                         <img src="{{ asset('storage/' . $banner->image) }}" 
                              alt="{{ $banner->title }}"
-                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                             loading="lazy">
                         
                         <!-- Gradient Overlay -->
                         <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
@@ -544,7 +552,9 @@
                                                     <!-- Thumbnail Image -->
                                                     <img src="https://img.youtube.com/vi/{{ $video->youtube_id }}/maxresdefault.jpg" 
                                                          alt="{{ $video->title }}"
-                                                         class="absolute inset-0 w-full h-full object-cover video-thumbnail">
+                                                         class="absolute inset-0 w-full h-full object-cover video-thumbnail"
+                                                         loading="lazy"
+                                                         width="1280" height="720">
                                                     
                                                     <!-- Video iframe (hidden by default, shown on hover) -->
                                                     <iframe 

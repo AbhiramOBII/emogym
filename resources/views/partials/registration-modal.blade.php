@@ -106,8 +106,26 @@
     </div>
 </div>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
+// Lazy load Razorpay script only when needed
+let razorpayLoaded = false;
+function loadRazorpay() {
+    return new Promise((resolve, reject) => {
+        if (razorpayLoaded) {
+            resolve();
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.onload = () => {
+            razorpayLoaded = true;
+            resolve();
+        };
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
 let currentProgramData = {};
 
 function openRegistrationModal(programId, programTitle, programPrice, programDate, programDateId = null, originalPrice = null, discount = null) {
@@ -225,6 +243,9 @@ async function submitRegistration(event) {
         const data = await response.json();
         
         if (response.ok && data.order_id) {
+            // Load Razorpay script if not already loaded
+            await loadRazorpay();
+            
             // Initialize Razorpay
             const options = {
                 key: '{{ config("services.razorpay.key") }}',

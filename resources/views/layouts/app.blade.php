@@ -11,17 +11,30 @@
     <link rel="shortcut icon" href="{{ asset('images/EmoGym-logo.png') }}" type="image/png">
     <link rel="apple-touch-icon" href="{{ asset('images/EmoGym-logo.png') }}">
     
-    <!-- Fonts -->
+    <!-- Preconnects for critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://img.youtube.com" crossorigin>
+    <link rel="preconnect" href="https://yt3.ggpht.com" crossorigin>
+    
+    <!-- Preload LCP image for home page -->
+    @if(request()->routeIs('home'))
+    <link rel="preload" as="image" href="{{ asset('images/tara-3.webp') }}" type="image/webp">
+    @endif
+    
+    <!-- Fonts - with display=swap for fast text rendering -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Baloo+Tamma+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
-    <!-- Font Awesome - Load before Tailwind -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome - Non-render-blocking load -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
-    <!-- AOS - Animate On Scroll Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- AOS CSS - Non-render-blocking load -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -259,6 +272,18 @@
         /* Smooth scroll */
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        /* Prevent horizontal scroll on all devices */
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+        
+        /* Clip all sections to prevent overflow */
+        section {
+            overflow-x: hidden;
         }
         
         /* Hero Section Enhanced Animations */
@@ -445,7 +470,7 @@
     
     @stack('styles')
 </head>
-<body class="font-sans text-dark-text bg-dark-bg leading-relaxed loading overflow-x-hidden">
+<body class="font-sans text-dark-text bg-dark-bg leading-relaxed loading overflow-x-hidden md:overflow-x-hidden">
     <!-- Preloader -->
     <div id="preloader">
         <div class="loader-container">
@@ -454,26 +479,49 @@
         </div>
     </div>
     
+    <div class="w-full overflow-x-hidden">
     @include('partials.header')
     
-    <main>
+    <main class="overflow-x-hidden">
         @yield('content')
     </main>
     
     @include('partials.footer')
+    </div>
     
-    <!-- AOS - Animate On Scroll JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- AOS - Animate On Scroll JS - Deferred -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     
     <!-- Scripts -->
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true,
-            offset: 50,
-            delay: 0,
+        // Initialize AOS after DOM is ready and script is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for AOS script to load
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-out-cubic',
+                    once: true,
+                    offset: 50,
+                    delay: 0,
+                    disable: 'mobile', // Disable on mobile to reduce reflows
+                    startEvent: 'load', // Start after page load to reduce LCP delay
+                });
+            } else {
+                // Fallback: wait for AOS to be available
+                window.addEventListener('load', function() {
+                    if (typeof AOS !== 'undefined') {
+                        AOS.init({
+                            duration: 800,
+                            easing: 'ease-out-cubic',
+                            once: true,
+                            offset: 50,
+                            delay: 0,
+                            disable: 'mobile',
+                        });
+                    }
+                });
+            }
         });
         
         // Preloader - Hide on page load

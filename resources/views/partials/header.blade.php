@@ -1,5 +1,5 @@
 <!-- Top Bar -->
-<div class="text-white py-1 px-4 text-sm relative overflow-hidden z-40" style="background-color: #1a1a1a;">
+<div class="text-white py-1 px-4 text-sm relative overflow-hidden z-40 max-w-full" style="background-color: #1a1a1a;">
     <div class="max-w-7xl mx-auto px-2 relative">
         <div class="grid grid-cols-2 md:flex md:justify-between md:items-center gap-4 items-center">
             <!-- Contact Info -->
@@ -47,7 +47,7 @@
         <div class="flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center gap-2">
-                <img src="{{ asset('images/EmoGym-logo.png') }}" alt="Emogym" class="h-14 sm:h-16 md:h-20 w-auto">
+                <img src="{{ asset('images/EmoGym-logo.png') }}" alt="Emogym" class="h-14 sm:h-16 md:h-20 w-auto" width="100" height="100">
             </div>
 
             <!-- Desktop Navigation Menu -->
@@ -66,8 +66,8 @@
             </nav>
 
             <!-- Mobile Navigation Menu -->
-            <nav class="mobile-nav fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 invisible transition-all duration-300">
-                <div class="absolute right-0 top-0 h-full w-80 max-w-[80vw] bg-dark-card shadow-2xl transform translate-x-full transition-transform duration-300 overflow-y-auto">
+            <nav class="mobile-nav fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 invisible transition-all duration-300 overflow-hidden">
+                <div class="absolute right-0 top-0 h-full w-80 max-w-[80vw] bg-dark-card shadow-2xl transform translate-x-full transition-transform duration-300 overflow-y-auto overflow-x-hidden">
                     <!-- Close button for mobile menu -->
                     <div class="absolute top-6 right-6 cursor-pointer mobile-menu-close">
                         <i class="fas fa-times text-2xl text-dark-text hover:text-primary transition-colors duration-300"></i>
@@ -93,7 +93,7 @@
             <div class="flex items-center gap-2 sm:gap-4">
                 <!-- Second Logo -->
                 <div class="flex items-center">
-                    <img src="{{ asset('images/Bhavanathmaka-2-white.webp') }}" alt="Bhavanathmaka" class="h-14 sm:h-16 md:h-20 w-auto">
+                    <img src="{{ asset('images/Bhavanathmaka-2-white.webp') }}" alt="Bhavanathmaka" class="h-14 sm:h-16 md:h-20 w-auto" width="148" height="100">
                 </div>
                 
                 <!-- Mobile Menu Toggle -->

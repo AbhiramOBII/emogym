@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="bg-charcoal text-white pt-24 pb-8">
+<footer class="bg-charcoal text-white pt-24 pb-8 overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <!-- Row 1: About Emogym & Newsletter -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-16 lg:gap-20 mb-16">
